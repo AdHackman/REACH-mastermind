@@ -59,6 +59,12 @@ var timeLeft = 20
 var timerEl = document.querySelector("#timer")
 timerEl.textContent = timeLeft + ' seconds remaining';
 
+Gamebtn.addEventListener("click", startGame);
+Gamebtn.addEventListener("mouseup", hideElements);
+function hideElements () {
+   Gamebtn.style.visibility="hidden"
+}
+
 //timer for the game//
 function gameTime (){
   var timeInterval = setInterval(function () {
