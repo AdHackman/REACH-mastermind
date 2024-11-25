@@ -43,6 +43,23 @@ console.log("Let's play Mastermind! Try to guess the 4-digit number.");
 
 // I wrote this code when I built a timed quiz for my bootcamp and just integrated the code here
 
+var Gamebtn = document.querySelector("#generate")
+// QuizBtn.onclick = function () {
+//     document.getElementById("#generate").remove(QuizBtn);
+//     this.remove()
+// };
+var submitBtn = document.querySelector("#submit-initials")
+var initialsPage = document.querySelector("#initials-page")
+initialsPage.style.visibility="hidden"
+var scorePage = document.querySelector("#score-page")
+scorePage.style.visibility="hidden"
+var quizWrapper = document.querySelector("#question-wrapper")
+var score = 0
+var timeLeft = 20
+var timerEl = document.querySelector("#timer")
+timerEl.textContent = timeLeft + ' seconds remaining';
+
+//timer for the game//
 function gameTime (){
   var timeInterval = setInterval(function () {
       console.log(timeLeft)
