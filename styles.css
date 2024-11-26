@@ -1,16 +1,110 @@
+/* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  header, footer {
-    background: #333;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-  }
-  main {
-    padding: 20px;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+p {
+  text-align: center;
+  color: #555;
+}
+
+.game {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.history {
+  width: 40%;
+  border-right: 2px solid #ddd;
+}
+
+.history h2 {
+  margin: 0;
+  color: #444;
+}
+
+#history-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#history-list li {
+  padding: 8px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.game-controls {
+  width: 60%;
+}
+
+.input-row {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+#guess {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.feedback {
+  margin-top: 10px;
+  color: #d9534f;
+  font-weight: bold;
+}
+
+#attempts-remaining {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+#attempts-remaining span {
+  color: #007bff;
+}

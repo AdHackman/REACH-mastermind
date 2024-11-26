@@ -4,7 +4,7 @@ const path = require('path'); // Node.js built-in module for handling file paths
 const app = express(); //creating an express server
 const port = process.env.PORT || 3000; //setting the port to 3000
 
-app.use(express.static('public')); //serving static files from the public folder
+app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 app.use(express.json())
 
 
