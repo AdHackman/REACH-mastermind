@@ -21,42 +21,54 @@
 
 const getRandomNumbers = async (arr, count) => {
     const response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
-    const data = await response.json();
-  
+    console.log("response", response);
+    const data = response && (await getNums(response));    
+    console.log("data", data);
     const arrayCopy = [...arr];
   
+
+    function getNums(response) {
+      const { data } = response;
+      let nums = data.split("\n");
+      nums.pop();
+      let numsInt = nums.map((nums) => parseInt(nums));
+      console.log("numsInt", numsInt);
+      return numsInt;
+    
+    }
+
     for (let i = arrayCopy.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
     }
-  
     return arrayCopy.slice(0, count);
   }
+
 
  const startGame = async () => {
     const numbers = [0, 1, 2, 3, 4, 5, 6, 7];
     const randomNumbers = await getRandomNumbers(numbers, 4);
-    console.log(randomNumbers);
+    console.log("randomNumbers", randomNumbers);
   }
 
 console.log("Let's play Mastermind! Try to guess the 4-digit number.");
 
 // I wrote this code when I built a timed quiz for my bootcamp and just integrated the code here
 
-var Gamebtn = document.querySelector("#generate")
+let Gamebtn = document.querySelector("#generate")
 // QuizBtn.onclick = function () {
 //     document.getElementById("#generate").remove(QuizBtn);
 //     this.remove()
 // };
-var submitBtn = document.querySelector("#submit-initials")
-var initialsPage = document.querySelector("#initials-page")
+let submitBtn = document.querySelector("#submit-initials")
+let initialsPage = document.querySelector("#initials-page")
 initialsPage.style.visibility="hidden"
-var scorePage = document.querySelector("#score-page")
+let scorePage = document.querySelector("#score-page")
 scorePage.style.visibility="hidden"
-var quizWrapper = document.querySelector("#question-wrapper")
-var score = 0
-var timeLeft = 20
-var timerEl = document.querySelector("#timer")
+let quizWrapper = document.querySelector("#question-wrapper")
+let score = 0
+let timeLeft = 20
+let timerEl = document.querySelector("#timer")
 timerEl.textContent = timeLeft + ' seconds remaining';
 
 Gamebtn.addEventListener("click", startGame);
@@ -67,7 +79,7 @@ function hideElements () {
 
 //timer for the game//
 function gameTime (){
-  var timeInterval = setInterval(function () {
+  let timeInterval = setInterval(function () {
       console.log(timeLeft)
     // As long as the `timeLeft` is greater than 1
     if (timeLeft > 1) {
@@ -93,33 +105,33 @@ function gameTime (){
 } 
 
 function saveScore () {
-  var savedscore = localStorage.getItem("score")
+  let savedscore = localStorage.getItem("score")
   if (savedscore) {
       savedscore = JSON.parse(savedscore)
   }else {
       savedscore = []
   } 
-  var initials = document.querySelector("#initials").value
+  let initials = document.querySelector("#initials").value
   savedscore.push({
       initials: initials,
       score: score
   })
   localStorage.setItem("score",JSON.stringify(savedscore));
   showHighScores ()
-  var playerScore = document.querySelector("#player-score")
+  let playerScore = document.querySelector("#player-score")
   playerScore.textContent = initials + " : " + score
 }
 
 function showHighScores () {
-  var showHighScore = document.querySelector("#highscore-table")
-  var savedscore = localStorage.getItem("score")
+  let showHighScore = document.querySelector("#highscore-table")
+  let savedscore = localStorage.getItem("score")
   if (savedscore) {
       savedscore = JSON.parse(savedscore)
   }else {
       savedscore = []
   } 
-  for (var i=0; i<savedscore.length; i++) {
-      var contentHolder = document.createElement("div")
+  for (let i=0; i<savedscore.length; i++) {
+      let contentHolder = document.createElement("div")
       contentHolder.textContent = savedscore[i].initials + ":" + savedscore[i].score
       showHighScore.appendChild(contentHolder)
   }
