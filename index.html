@@ -9,7 +9,7 @@
   <title>Mastermind Game</title>
 </head>
 
-<body>
+<body onload="initializeGame(event)">
   <header>
     <h1>Welcome to the Mastermind Game!</h1>
   </header>
@@ -21,38 +21,38 @@
         <ul id="history-list">
         </ul>
       </div>
-      <div class="game-controls">
+      <form id="game-form" class="game-controls" onsubmit="checkGuess(event)">
+        <div> Time:<p id="timer" alt="timer for game"></p>
+        </div>
         <div class="input-row">
           <label for="guess">Your Guess:</label>
-          <input type="text" id="guess" placeholder="e.g., 0123" maxlength="4" />
+          <input type="text" id="guess" name="guess" placeholder="e.g., 0123" maxlength="4" pattern="[0-7]{4}"
+            title="Enter 4 digits between 0 and 7" required />
         </div>
-        <button id="submit-guess">Submit Guess</button>
-        <p id="feedback" class="feedback"></p>
+        <button type="submit" id="submit-guess">Submit Guess</button>
+        <p id="feedback" class="feedback" aria-live="polite"></p>
         <p id="attempts-remaining">Attempts Remaining: <span>10</span></p>
-      </div>
-      <h2>Play the Mastermind Game!</h2>
-      Time: <span id="timer" alt="timer for game"></span>
-      <button id="generate" class="button">Let's Play!</button>
+      </form>
     </div>
 
-      <!-- <div id="question-wrapper">
+    <!-- <div id="question-wrapper">
             <h2 id="question"></h2>
             <span id="question-response"></span>
         </div> -->
 
-      <div id="initials-page">
-        <p>Enter Your Initials.</p>
-        <button id="submit-initials">Submit</button>
-        <input id="initials" type="text" />
-      </div>
+    <div id="initials-page">
+      <p>Enter Your Initials.</p>
+      <button id="submit-initials">Submit</button>
+      <input id="initials" type="text" />
+    </div>
 
-      <div id="score-page">
-        <h3>Thanks for playing the game!</h3>
-        <h4 id="player-score"></h4>
-        <!-- <input type="text"/> -->
-        <!-- <span id="final-score">30</span>/50 -->
-        <section id="highscore-table"></section>
-      </div>
+    <div id="score-page">
+      <h3>Thanks for playing the game!</h3>
+      <h4 id="player-score"></h4>
+      <!-- <input type="text"/> -->
+      <!-- <span id="final-score">30</span>/50 -->
+      <section id="highscore-table"></section>
+    </div>
   </main>
   <footer>
     <p>&copy; 2024 Adjoa Hackman. All rights reserved.</p>
