@@ -19,32 +19,59 @@
   
 // I can use the code above without the API integration but I can use the code below to integrate the API
 
-const getRandomNumbers = async (arr, count) => {
-    const response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
-    console.log("response", response);
-    const data = response && (await getNums(response));    
-    console.log("data", data);
-    const arrayCopy = [...arr];
-  
+// const getRandomNumbers = async (arr, count) => {
+//   try {
+//     const response = await fetch('https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new');
+//     console.log("response", response);
+//   } catch (error) {
+//     console.log("response", response);
+//     const data = await response.json();    
+//     console.log("data", data);
+//     console.log(error)
+//     // const arrayCopy = [...arr];
 
-    function getNums(response) {
-      const { data } = response;
-      let nums = data.split("\n");
-      nums.pop();
-      let numsInt = nums.map((nums) => parseInt(nums));
-      console.log("numsInt", numsInt);
-      return numsInt;
-    
+//     // for (let i = arrayCopy.length - 1; i > 0; i--) {
+//     //   const j = Math.floor(Math.random() * (i + 1));
+//     //   [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
+//     // }
+//     console.log(error)
+//     // return arrayCopy.slice(0, count);
+//   }
+// }
+
+const getRandomNumbers = async () => {
+  try {
+    // Fetch random numbers from the API
+    const response = await fetch(
+      "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new"
+    );
+    if (!response.ok) {
+      throw new Error(`Error fetching random numbers: ${response.status}`);
     }
 
-    for (let i = arrayCopy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
-    }
-    return arrayCopy.slice(0, count);
+    // Parse response text into an array of numbers
+    const text = await response.text();
+    const randomNumbers = text
+      .trim()
+      .split("\n")
+      .map((num) => parseInt(num, 10)); // Convert strings to integers
+
+    return randomNumbers;
+  } catch (error) {
+    console.error("Failed to fetch random numbers:", error);
+    return null;
   }
-
-
+};
+  
+  // function getNums(response) {
+  //   const { data } = response;
+  //   let nums = data.split("\n");
+  //   nums.pop();
+  //   let numsInt = nums.map((nums) => parseInt(nums));
+  //   console.log("numsInt", numsInt);
+  //   return numsInt;
+  
+  // }
  const startGame = async () => {
     const numbers = [0, 1, 2, 3, 4, 5, 6, 7];
     const randomNumbers = await getRandomNumbers(numbers, 4);
